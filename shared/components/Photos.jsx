@@ -8,9 +8,16 @@ class Photos extends React.Component {
     this.state = { photos: [], page: -1};
     this.fetch = this.fetch.bind(this);
   }
-  
+
   fetch() {
-    // get http://jsonplaceholder.typicode.com/photos/
+    fetch('http://jsonplaceholder.typicode.com/photos/')
+      .then((response) => {
+        return response.json();
+      })
+      .then((photos) => {
+        photos = photos.slice(1,20)
+        this.setState({photos: photos})
+      })
   }
   render() {
     return (
